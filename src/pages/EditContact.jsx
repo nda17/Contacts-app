@@ -74,13 +74,13 @@ const EditContact = () => {
 	}
 
 	const validateOptional = () => {
-		company.current.value.length
-			? (company.current.style.borderColor = '#44c47c')
-			: (company.current.style.borderColor = 'grey')
+		companyEdit.current.value.length
+			? (companyEdit.current.style.borderColor = '#44c47c')
+			: (companyEdit.current.style.borderColor = 'grey')
 
-		job.current.value.length
-			? (job.current.style.borderColor = '#44c47c')
-			: (job.current.style.borderColor = 'grey')
+		jobEdit.current.value.length
+			? (jobEdit.current.style.borderColor = '#44c47c')
+			: (jobEdit.current.style.borderColor = 'grey')
 	}
 
 	const saveEditContact = currentContact => {
@@ -121,8 +121,10 @@ const EditContact = () => {
 				lastName: lastNameEdit.current.value,
 				email: emailEdit.current.value,
 				phone: phoneEdit.current.value,
-				company: companyEdit.current.value,
-				job: jobEdit.current.value
+				company: companyEdit.current.value.length
+					? companyEdit.current.value
+					: 'No data',
+				job: jobEdit.current.value.length ? jobEdit.current.value : 'No data'
 			}
 			saveEditContact(data)
 			resetForm()
@@ -149,6 +151,7 @@ const EditContact = () => {
 			<p className="pt-[1rem] font-bold mb-[1rem]">{informer}</p>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					defaultValue={firstName}
 					ref={firstNameEdit}
 					onChange={validateFirstName}
@@ -156,10 +159,11 @@ const EditContact = () => {
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">required</span>
+				<label className="text-[12px]">required</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					defaultValue={lastName}
 					ref={lastNameEdit}
 					onChange={validateLastName}
@@ -167,10 +171,11 @@ const EditContact = () => {
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">required</span>
+				<label className="text-[12px]">required</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="email"
 					defaultValue={email}
 					ref={emailEdit}
 					onChange={validateEmail}
@@ -178,10 +183,11 @@ const EditContact = () => {
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">Example: mail@mail.com (required)</span>
+				<label className="text-[12px]">Example: mail@mail.com (required)</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="tel"
 					defaultValue={phone}
 					ref={phoneEdit}
 					onChange={validatePhone}
@@ -189,31 +195,33 @@ const EditContact = () => {
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">digits only required</span>
+				<label className="text-[12px]">digits only required</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					defaultValue={company}
 					ref={companyEdit}
 					onChange={validateOptional}
 					placeholder="Company"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">
+				<label className="text-[12px]">
 					Fill this field for company (not required)
-				</span>
+				</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					defaultValue={job}
 					ref={jobEdit}
 					onChange={validateOptional}
 					placeholder="Job title"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">
+				<label className="text-[12px]">
 					Fill this field for job title (not required)
-				</span>
+				</label>
 			</div>
 			<div className="flex justify-between w-full pt-[1rem]">
 				<Link

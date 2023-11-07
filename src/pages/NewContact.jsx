@@ -123,14 +123,19 @@ const NewContact = () => {
 		e.preventDefault()
 		if (validate()) {
 			// submit AJAX
+
+			// company.current.value.length ? company.current.value : 'No data'
+			// job.current.value.length ? job.current.value : 'No data'
 			const data = {
 				id: Math.random().toFixed(5).toString().split('.')[1],
 				firstName: firstName.current.value,
 				lastName: lastName.current.value,
 				email: email.current.value,
 				phone: phone.current.value,
-				company: company.current.value,
-				job: job.current.value
+				company: company.current.value.length
+					? company.current.value
+					: 'No data',
+				job: job.current.value.length ? job.current.value : 'No data'
 			}
 			saveContact(data)
 			resetForm()
@@ -182,65 +187,71 @@ const NewContact = () => {
 			<p className="pt-[1rem] font-bold mb-[1rem]">{informer}</p>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					ref={firstName}
 					onChange={validateFirstName}
 					placeholder="First name"
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">required</span>
+				<label className="text-[12px]">required</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					ref={lastName}
 					onChange={validateLastName}
 					placeholder="Last name"
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">required</span>
+				<label className="text-[12px]">required</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="email"
 					ref={email}
 					onChange={validateEmail}
 					placeholder="Email"
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">Example: mail@mail.com (required)</span>
+				<label className="text-[12px]">Example: mail@mail.com (required)</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="tel"
 					ref={phone}
 					onChange={validatePhone}
 					placeholder="Phone"
 					required="required"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">digits only (required)</span>
+				<label className="text-[12px]">digits only (required)</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					ref={company}
 					onChange={validateOptional}
 					placeholder="Company"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">
+				<label className="text-[12px]">
 					Fill this field for company (not required)
-				</span>
+				</label>
 			</div>
 			<div className="flex flex-col">
 				<input
+					type="text"
 					ref={job}
 					onChange={validateOptional}
 					placeholder="Job title"
 					className="w-[262px] h-[24px] outline-none border-b border-solid border-[grey] pt-[8px] pb-[2px] box-content placeholder:text-purple-300 focus:border-purple-500 focus:placeholder:text-red-500 focus:placeholder:font-bold"
 				/>
-				<span className="text-[12px]">
+				<label className="text-[12px]">
 					Fill this field for job title (not required)
-				</span>
+				</label>
 			</div>
 			<div className="flex justify-between w-full pt-[1rem]">
 				<Link

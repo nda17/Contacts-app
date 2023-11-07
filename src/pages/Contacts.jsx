@@ -28,13 +28,13 @@ const Contacts = () => {
 		searchContacts(value)
 	}
 
-	const handleKeySearch = event => {
-		if (event.key === 'Enter') {
-			event.preventDefault()
-			setValue(value)
-			searchContacts(value)
-		}
-	}
+	// const handleKeySearch = event => {
+	// 	if (event.key === 'Enter') {
+	// 		event.preventDefault()
+	// 		setValue(value)
+	// 		searchContacts(value)
+	// 	}
+	// }
 
 	const removeContact = contact => {
 		setSavedContacts(savedContacts.filter(item => item.id !== contact.id))
@@ -62,7 +62,7 @@ const Contacts = () => {
 					color="red"
 					value={value}
 					onChange={onChangeSearch}
-					onKeyDown={handleKeySearch}
+					// onKeyDown={handleKeySearch}
 				/>
 				<Link
 					to={'/add-contacts'}
@@ -76,11 +76,12 @@ const Contacts = () => {
 				{renderedContacts.map(item => (
 					<details
 						key={item.id}
-						className="py-[2rem] mb-[0.8rem] bg-[lightgrey] rounded-[0.8rem]"
+						className="py-[2rem] mb-[0.8rem] bg-[lightgrey] rounded-[0.8rem] shadow-md"
 					>
-						<summary className="relative">
-							<p className="w-[65%] sm:w-[75%] md:w-[80%]">{`${item.firstName} ${item.lastName}`}</p>
-							<div className="flex flex-col">
+						<summary className="px-[0.5rem] relative">
+							<p className="w-[63%] sm:w-[77%] md:w-[81%] self-center break-all font-bold">{`${item.firstName}`}</p>
+							<p className="text-red-700 font-extrabold w-[63%] sm:w-[77%] md:w-[81%] self-center break-all font-bold">{`${item.lastName}`}</p>
+							<div className="flex flex-col absolute right-[0] top-[50%] translate-x-[-0.5rem] translate-y-[-50%]">
 								<Link
 									to={'/edit-contact'}
 									state={{
@@ -92,24 +93,36 @@ const Contacts = () => {
 										company: item.company,
 										job: item.job
 									}}
-									className="absolute right-[0.5rem] top-[-1.4rem] m-auto w-[6rem] h-[2.5rem]  rounded-[0.8rem] bg-purple-800 py-[0.2rem] text-[#ffffff] drop-shadow-sm hover:bg-purple-600 hover:opacity-100 transition-all duration-[0.4s] active:scale-[0.97] flex items-center justify-center"
+									className="mb-[1rem] w-[6rem] h-[2.5rem] rounded-[0.8rem] bg-purple-800 py-[0.2rem] text-[#ffffff] drop-shadow-sm hover:bg-purple-600 hover:opacity-100 transition-all duration-[0.4s] active:scale-[0.97] flex items-center justify-center"
 								>
 									Edit
 								</Link>
 								<button
 									onClick={() => removeContact(item)}
-									className="absolute right-[0.5rem] bottom-[-1.4rem] m-auto w-[6rem] h-[2.5rem]  rounded-[0.8rem] bg-purple-800 py-[0.2rem] text-[#ffffff] drop-shadow-sm hover:bg-purple-600 hover:opacity-100 transition-all duration-[0.4s] active:scale-[0.97] flex items-center justify-center"
+									className="w-[6rem] h-[2.5rem] rounded-[0.8rem] bg-purple-800 py-[0.2rem] text-[#ffffff] drop-shadow-sm hover:bg-purple-600 hover:opacity-100 transition-all duration-[0.4s] active:scale-[0.97] flex items-center justify-center"
 								>
-									Remove
+									Delete
 								</button>
 							</div>
 						</summary>
 						<div className="content p-[0.7rem]">
 							<ul>
-								<li className="w-[62%]">Email: {item.email}</li>
-								<li>Phone number: {item.phone}</li>
-								<li>Company: {item.company}</li>
-								<li>Job: {item.job}</li>
+								<li className="break-all mb-[0.4rem]">
+									<span className="font-bold">Email: </span>
+									<span className="text-purple-700">{item.email}</span>
+								</li>
+								<li className="break-all mb-[0.4rem]">
+									<span className="font-bold">Phone number: </span>
+									<span className="text-purple-700">{item.phone}</span>
+								</li>
+								<li className="break-all mb-[0.4rem]">
+									<span className="font-bold">Company: </span>
+									<span className="text-purple-700">{item.company}</span>
+								</li>
+								<li className="break-all">
+									<span className="font-bold">Job: </span>
+									<span className="text-purple-700">{item.job}</span>
+								</li>
 							</ul>
 						</div>
 					</details>
