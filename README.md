@@ -19,7 +19,7 @@ An app for storing contacts. Features:
 
 ## Deployed:
 
-[Watch here](ADDED LINK)
+[Watch here](https://nda17.github.io/Contacts-app/)
 
 ## Project setup:
 
