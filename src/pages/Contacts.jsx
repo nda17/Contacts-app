@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Contacts = () => {
 	const [informer, setInformer] = useState('')
-	const [contacts, setContacts] = useState([])
+	const [renderedContacts, setRenderedContacts] = useState([])
 	const [savedContacts, setSavedContacts] = useLocalStorage([], 'contacts')
 	const [searchContact, setSearchContact] = useState([])
 	const [value, setValue] = useState('')
@@ -22,13 +22,13 @@ const Contacts = () => {
 		)
 	}
 
-	const onChange = event => {
+	const onChangeSearch = event => {
 		const value = event.target.value
 		setValue(value)
 		searchContacts(value)
 	}
 
-	const handleKey = event => {
+	const handleKeySearch = event => {
 		if (event.key === 'Enter') {
 			event.preventDefault()
 			setValue(value)
@@ -41,16 +41,16 @@ const Contacts = () => {
 	}
 
 	useEffect(() => {
-		!contacts.length
+		!renderedContacts.length
 			? setInformer('No saved contacts.')
-			: setInformer(`${contacts.length} contact found :`)
-	}, [contacts])
+			: setInformer(`${renderedContacts.length} contact found :`)
+	}, [renderedContacts])
 
 	useEffect(() => {
 		!searchContact.length
-			? setContacts(savedContacts)
-			: setContacts(searchContact)
-	}, [searchContact])
+			? setRenderedContacts(savedContacts)
+			: setRenderedContacts(searchContact)
+	}, [searchContact, savedContacts])
 
 	return (
 		<div>
@@ -58,11 +58,11 @@ const Contacts = () => {
 				<input
 					className="w-[100%] md:w-[72%] lg:w-[79%] xl:w-[77%] xxl:w-[80.5%] h-[3rem] p-[10px] bg-[#e8eced] shadow-[0px_5px_10px_2px_rgba(34,60,80,0.2)] border-[2px] border-solid border-[#ffd700] outline-none focus:border-[#39c832] transition-all duration-[0.3s] placeholder:opacity-100 placeholder:text-black rounded-[0.8rem]  mb-[1.3rem] md:mb-0"
 					type="search"
-					placeholder="Search for a contact by name, email address, or phone number..."
+					placeholder="Name, email, or phone number..."
 					color="red"
 					value={value}
-					onChange={onChange}
-					onKeyDown={handleKey}
+					onChange={onChangeSearch}
+					onKeyDown={handleKeySearch}
 				/>
 				<Link
 					to={'/add-contacts'}
@@ -73,7 +73,7 @@ const Contacts = () => {
 			</form>
 			<p className="text-center font-black mb-[0.5rem]">{informer}</p>
 			<div className="w-full md:w-[90%] xl:w-[70%] flex flex-col  px-[0.7rem] mx-auto mb-[3rem]">
-				{contacts.map(item => (
+				{renderedContacts.map(item => (
 					<details
 						key={item.id}
 						className="py-[2rem] mb-[0.8rem] bg-[lightgrey] rounded-[0.8rem]"

@@ -1,22 +1,34 @@
-# «TITLE NAME»
+# «Contacts App.»
 
-## Used:
+## Description:
+
+An app for storing contacts. Features:
+
+- Сreating new contacts.
+- Editing existing contacts.
+- Delete existing contacts.
+- Search and filter contacts by first name, last name, email, phone number.
+
+## Technologies used:
+
 - Vite v4.4.5 + React v18.2.0
 - JSX
 - HTML
-- SCSS
 - React-router-DOM v6.15.0
-- Tailwind
+- Tailwind CSS
 
 ## Deployed:
+
 [Watch here](ADDED LINK)
 
 ## Project setup:
+
 ```
 npm install / yarn
 ```
 
 ## Compiles and minifies for production:
+
 ```
 npm run build /yarn run build
 ```
